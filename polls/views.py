@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 
 from .models import Question
 
 
 def index(request):
-    questions = Question.objects.order_by('-pub_date')[:5]
+    questions = Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
     context = {'latest_question_list': questions}
     return render(request, 'polls/index.html', context)
 
