@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Articles APP</title>
-</head>
-<body>
-    <h1>Articles:</h1>
-    {% if article_list %}
-    <ul>
-        {% for article in articles_list %}
-        <li><a href="{% url 'articles:detail' article.id ">{{ article.title }}</a></li>
-        {% endfor %}
-    </ul>
+
+{% extends 'articles/base.html' %}
+
+{% block body %}
+    {% if all_articles %}
+        <h1>All articles</h1>
+        <ul>
+            {% for article in all_articles %}
+                <li><a href="{% url 'articles:detail' article.id %}">{{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
     {% else %}
-        <p>No articles are available</p>
+        <p>Sorry,there are no articles</p>
     {% endif %}
-</body>
-</html>
+{% endblock %}

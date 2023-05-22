@@ -1,23 +1,20 @@
 from django.contrib import admin
 from django.db import models
 
-# Create your models here.
-
 
 class Article(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=100)
     text = models.TextField()
-    author = models.CharField(max_length=200)
+    author = models.CharField(max_length=100)
     like_count = models.IntegerField(default=0)
 
     @admin.display(
         boolean=True,
-        description="Is popular?",
+        description='Is this article popular?',
         ordering='like_count'
     )
     def is_popular(self):
-        return self.like_count >= 100
+        return self.like_count > 100
 
     def __str__(self):
         return self.title
-
